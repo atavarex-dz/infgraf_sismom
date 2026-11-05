@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0960E5">
+  <title>SisMOM — Interação das Metas (Blue Mode)</title>
+  <link rel="stylesheet" href="assets/dobra2light.css">
+</head>
+
+<body>
+  <section id="Interacao" aria-labelledby="interacao-titulo">
+    <div class="scene">
+      <div class="background-layer" aria-hidden="true">
+        <span class="halo a"></span>
+        <span class="halo b"></span>
+        <span class="halo c"></span>
+      </div>
+      <div class="particle-layer" aria-hidden="true" id="particles"></div>
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">SisMOM · Integração das Metas</p>
+          <div class="topline"></div>
+        </div>
+        <div class="stage-readout" aria-live="polite">
+          <span class="dot"></span>
+          <span id="stageName">Em espera</span>
+        </div>
+      </header>
+      <div class="intro" id="intro">
+        <span class="kicker">Monitoramento de Derramamentos de Óleo no mar</span>
+        <h1 id="interacao-titulo">Agilidade <br>nas <em>tomadas de Decisão.</em></h1>
+        <p>Como é integrada nossa rede de observação, detecção, previsão e alerta.</p>
+        <span class="scroll-cue"><i></i> role para ativar</span>
+      </div>
+      <svg class="connections-layer" viewBox="0 0 1000 581" aria-hidden="true">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#FFFFFF" />
+          </marker>
+        </defs>
+
+        <!-- 1: Section Observar -> Section Detectar -->
+        <path class="connection" data-path="p1" marker-end="url(#arrow)" d="M 260 300 L 275 300" />
+
+        <!-- 2: Section Detectar -> Meta 03 (Prever) -->
+        <path class="connection" data-path="p2" marker-end="url(#arrow)" d="M 535 300 L 574 300" />
+
+        <!-- 3: Meta 05 -> Meta 03 (mais 10px para esquerda) -->
+        <path class="connection" data-path="p3" marker-end="url(#arrow)" d="M 696 300 L 658 300" />
+
+        <!-- 4: Meta 05 -> Meta 02 (arrastada 30px para esquerda e gap superior reduzido em 10px) -->
+        <path class="connection" data-path="p4" marker-end="url(#arrow)" d="M 753 234 L 753 215 L 505 215 L 505 255" />
+
+        <!-- 5a: Section Observar -> Meta 04 (linhas retas contornando por cima) -->
+        <path class="connection" data-path="p5" marker-end="url(#arrow)" d="M 130 180 L 130 152 L 210 152" />
+
+        <!-- 5b: Section Detectar -> Meta 04 (linha reta vertical) -->
+        <path class="connection" data-path="p6" marker-end="url(#arrow)" d="M 405 180 L 405 152" />
+
+        <!-- 5c: Section Prever -> Meta 04 (linhas retas contornando por cima) -->
+        <path class="connection" data-path="p7" marker-end="url(#arrow)" d="M 680 180 L 680 152 L 600 152" />
+
+        <!-- 6a: Meta 06 -> Section Observar (linha reta vertical subindo) -->
+        <path class="connection" data-path="p8" marker-end="url(#arrow)" d="M 130 460 L 130 420" />
+
+        <!-- 6b: Meta 06 -> Section Detectar (linha reta vertical subindo) -->
+        <path class="connection" data-path="p9" marker-end="url(#arrow)" d="M 405 460 L 405 420" />
+
+        <!-- 6c: Meta 06 -> Section Prever (linha reta vertical subindo) -->
+        <path class="connection" data-path="p10" marker-end="url(#arrow)" d="M 680 460 L 680 420" />
+
+        <!-- 7: Meta 04 -> Section Entregar (linha reta horizontal) -->
+        <path class="connection" data-path="p11" marker-end="url(#arrow)" d="M 810 100 L 850 100" />
+
+        <circle class="pulse" data-pulse="p1" r="4.5" />
+        <circle class="pulse" data-pulse="p2" r="4.5" />
+        <circle class="pulse" data-pulse="p3" r="4.5" />
+        <circle class="pulse" data-pulse="p4" r="4.5" />
+        <circle class="pulse" data-pulse="p5" r="4.5" />
+        <circle class="pulse" data-pulse="p6" r="4.5" />
+        <circle class="pulse" data-pulse="p7" r="4.5" />
+        <circle class="pulse" data-pulse="p8" r="4.5" />
+        <circle class="pulse" data-pulse="p9" r="4.5" />
+        <circle class="pulse" data-pulse="p10" r="4.5" />
+        <circle class="pulse" data-pulse="p11" r="4.5" />
+      </svg>
+      <div class="diagram-layer" id="diagram">
+        <section class="group group-observar" data-group="observar" aria-labelledby="observar">
+          <h2 id="observar" class="group-label"><span>01 · Observar</span></h2>
+          <a href="#" class="meta meta-7" data-meta="7">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 97.61 81.24" aria-hidden="true">
+                <use href="icons/SVG/icon_meta7.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 07</span>
+            <h3 class="title">Sensores autônomos<small>Drones e Veículos não tripulados</small></h3>
+          </a>
+          <a href="#" class="meta meta-8" data-meta="8">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 98.39 95.48" aria-hidden="true">
+                <use href="icons/SVG/icon_meta8.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 08</span>
+            <h3 class="title">Microssatélites<small>Viabilidade de Constelação</small></h3>
+          </a>
+        </section>
+        <section class="group group-detectar" data-group="detectar" aria-labelledby="detectar">
+          <h2 id="detectar" class="group-label"><span>02 · Detectar</span></h2>
+          <a href="#" class="meta meta-1" data-meta="1">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 108.05 98.25" aria-hidden="true">
+                <use href="icons/SVG/icon_meta1.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 01</span>
+            <h3 class="title">Navios<small>SAR e Análises de AIS</small></h3>
+          </a>
+          <a href="#" class="meta meta-2" data-meta="2">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 89.02 106.01" aria-hidden="true">
+                <use href="icons/SVG/icon_meta2.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 02</span>
+            <h3 class="title">Óleo no mar<small>Detecção e Análise de tipo de Óleo</small></h3>
+          </a>
+        </section>
+        <section class="group group-prever" data-group="prever" aria-labelledby="prever">
+          <h2 id="prever" class="group-label"><span>03 · Prever</span></h2>
+          <a href="#" class="meta meta-3" data-meta="3">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 127.3 87.13" aria-hidden="true">
+                <use href="icons/SVG/icon_meta3.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 03</span>
+            <h3 class="title">Dispersão<small>Modelagem e dispersão de óleo no Mar</small></h3>
+          </a>
+          <a href="#" class="meta meta-5" data-meta="5">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 104.16 91.72" aria-hidden="true">
+                <use href="icons/SVG/icon_meta5.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 05</span>
+            <h3 class="title">Previsão oceano-atmosfera<small>Modelagem oceano-atmosférica para prognósticos</small>
+            </h3>
+          </a>
+        </section>
+        <section class="group group-integrar" data-group="integrar" aria-labelledby="integrar">
+          <h2 id="integrar" class="group-label"><span>04 · Integrar e alertar</span></h2>
+          <a href="#" class="meta meta-4" data-meta="4">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 171.59 108.62" aria-hidden="true">
+                <use href="icons/SVG/icon_meta4.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <div>
+              <span class="number">META 04</span>
+              <h3 class="title">Sala de Situação<small>Integrar a coletar dados, o processamento, o monitoramento, a
+                  visualização e a geração de relatórios</small></h3>
+            </div>
+          </a>
+          <a href="#" class="meta meta-6" data-meta="6">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 97.45 88" aria-hidden="true">
+                <use href="icons/SVG/icon_meta6_s.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <div>
+              <span class="number">META 06</span>
+              <h3 class="title">Infraestrutura 24/7<small>Supercomputação · processamento ·
+                  armazenamento</small></h3>
+            </div>
+          </a>
+        </section>
+        <section class="group group-entregar" data-group="entregar" aria-labelledby="entregar">
+          <h2 id="entregar" class="group-label"><span>05 · Alertar</span></h2>
+          <a href="#" class="meta meta-9" data-meta="9">
+            <div class="meta__icon-box">
+              <svg class="icon" viewBox="0 0 111.4 136.33" aria-hidden="true">
+                <use href="icons/SVG/icon_meta9.svg#Camada_2"></use>
+              </svg>
+            </div>
+            <span class="number">META 09</span>
+            <h3 class="title">Informação qualificada<small>Para instituições competentes</small></h3>
+          </a>
+        </section>
+      </div>
+      <div class="network-legend"><b></b> relações estratégicas <i></i> fluxo de dados</div>
+      <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+    </div>
+    <p class="screen-reader">A rede integra sensores, satélites, detecção de navios e óleo, previsão de dispersão,
+      modelos oceano-atmosfera, sala de situação, infraestrutura contínua e entrega de informação qualificada.</p>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/dobra2.1light.js"></script>
+</body>
+
+</html>

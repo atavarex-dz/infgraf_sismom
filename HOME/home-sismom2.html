@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SisMOM — Ciência e Tecnologia para o Oceano</title>
+  <meta name="description"
+    content="O SisMOM integra observação, dados e inteligência artificial para apoiar a detecção, a previsão e a resposta a derramamentos de óleo no mar.">
+  <meta name="theme-color" content="#010A34">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/sismom.css">
+  <!-- Interactive metas section -->
+  <link rel="stylesheet" href="assets/dobra2.css">
+
+  <style>
+    /* Kallisto fallback — use Exo Bold Condensed as substitute */
+    :root {
+      --font-head: 'Exo', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .meta-card__name,
+    .flow__step-name,
+    .nav__brand,
+    .btn-primary,
+    .section-title {
+      font-family: var(--font-head);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════ NOISE -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════ CURSOR -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════ NAV -->
+  <nav class="nav" id="main-nav" aria-label="Navegação principal">
+    <a class="nav__brand" href="#top" aria-label="SisMOM início">
+      <img class="nav__brand-logo" src="assets/images/images-hero/LOGOSismom_HORIZ_NOME_BRANCO.svg"
+        alt="SisMOM — Ciência e Tecnologia para o Oceano">
+    </a>
+
+    <ul class="nav__links">
+      <li><a href="#sobre" id="nav-sobre">-SisMOM</a></li>
+      <li><a href="#inovacao" id="nav-inovacao">HISTÓRIA</a></li>
+      <li><a href="#Interacao" id="nav-metas" class="nav__cta">METAS</a></li>
+      <li><a href="#prototipos" id="nav-proto">APIS</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════ HERO -->
+  <section class="hero" id="top" aria-label="Hero — Do sinal à resposta no oceano">
+
+    <!-- Cartographic Grid -->
+    <div class="hero__grid" aria-hidden="true"></div>
+
+    <!-- Dual Layer Visual -->
+    <div class="hero__visual" id="hero-visual" aria-label="Mova o cursor para revelar a ocorrência observada">
+
+      <!-- Base layer: satellite / monitoring -->
+      <img class="hero__image hero__image--base" id="hero-base" src="assets/images/images-hero/navio1.png"
+        alt="Embarcação no mar durante operação de resposta a derramamento de óleo">
+
+      <!-- Reveal layer: operation at sea -->
+      <img class="hero__image hero__image--reveal" id="hero-reveal" src="assets/images/images-hero/navio2.png"
+        alt="Imagem de satélite do oceano com grade de monitoramento — camada de dados e análise do SisMOM">
+
+
+      <!-- Halo lens ring -->
+      <div class="hero__halo" id="hero-halo" aria-hidden="true"></div>
+    </div>
+
+    <!-- Veil gradient -->
+    <div class="hero__veil" aria-hidden="true"></div>
+
+    <!-- Scan overlay -->
+    <div class="hero__scan" aria-hidden="true"></div>
+
+    <!-- Data particles -->
+    <div class="hero__particles" id="hero-particles" aria-hidden="true"></div>
+
+    <!-- Copy -->
+    <div class="hero__copy">
+      <span class="hero__eyebrow" aria-label="SisMOM / Ciência e tecnologia para o oceano">
+        <span> Desenvolvimento de sistema multiusuário </span><br /><span>para detecção de manchas de óleo na
+          AJB.</span>
+      </span>
+
+      <h1>
+        <span class="line"><span> <span class="signal-word">Tecnologia</span></span></span>
+        <span class="line"><span>para monitoramento do Mar</span></span>
+
+      </h1>
+
+      <div class="hero__lead">
+        <span>Utilizando o estado da arte em tecnologias de sensoriamento remoto, modelagem atmosférica e oceânica e de
+          inteligência artificial</span>
+      </div>
+
+      <div class="hero__actions">
+        <a href="#metas" class="btn-primary" id="cta-metas">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="13 17 18 12 13 7"></polyline>
+            <polyline points="6 17 11 12 6 7"></polyline>
+          </svg>
+          Conheça as Metas
+        </a>
+        <a href="#sobre" class="btn-ghost" id="cta-sobre">
+          O Projeto ↓
+        </a>
+      </div>
+    </div>
+
+    <!-- HUD -->
+    <div class="hero__hud" id="hero-hud" aria-hidden="true">
+      <span>SISMOM / MONITORAMENTO MARÍTIMO</span>
+      <span>ESTADO / <b id="hud-state">LATENTE</b></span>
+      <span>X <b id="hud-x">000.0</b> / Y <b id="hud-y">000.0</b></span>
+    </div>
+
+    <!-- Mode hint — pointer devices only -->
+    <div class="hero__mode-hint" id="hero-hint" aria-hidden="true">
+      Mova o cursor para revelar
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ SIGNAL STRIP -->
+  <div class="signal-strip" aria-hidden="true">
+    <div class="signal-strip__track">
+      <span>Detecção de Navios</span>
+      <span>Detecção de Óleo</span>
+      <span>Modelagem de Dispersão</span>
+      <span>Previsão Oceano-Atmosférica</span>
+      <span>Sensores Autônomos</span>
+      <span>Constelação de Satélites</span>
+      <span>Sala de Situação</span>
+      <span>Supercomputação</span>
+      <span>Tomadores de Decisão</span>
+      <span>Imagens SAR</span>
+      <!-- duplicata para loop contínuo -->
+      <span>Detecção de Navios</span>
+      <span>Detecção de Óleo</span>
+      <span>Modelagem de Dispersão</span>
+      <span>Previsão Oceano-Atmosférica</span>
+      <span>Sensores Autônomos</span>
+      <span>Constelação de Satélites</span>
+      <span>Sala de Situação</span>
+      <span>Supercomputação</span>
+      <span>Tomadores de Decisão</span>
+      <span>Imagem SAR</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ HISTÓRIA -->
+  <section class="historia" id="historia" aria-label="História — O Desafio de 2019 e a Origem do SisMOM">
+    <div class="historia__header">
+      <span class="section-eyebrow reveal-up">Origem & Motivação</span>
+      <h2 class="section-title reveal-up">2019: Derrame Massivo de Petróleo<br>atinge a costa brasileira</h2>
+      <p class="historia__subtitle reveal-up">Um marco crítico para a ciência oceânica e para a soberania ambiental na
+        Amazônia Azul (Soares et al., 2022)</p>
+    </div>
+
+    <div class="historia__grid">
+      <div class="historia__card reveal-up">
+        <div class="historia__card-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 7V4h16v3M9 20h6M12 4v16"></path>
+            <rect x="5" y="7" width="14" height="13" rx="2"></rect>
+            <path d="M12 11a1.5 1.5 0 0 1 0 3 1.5 1.5 0 0 1 0-3z"></path>
+          </svg>
+        </div>
+        <div class="historia__card-content">
+          <span class="historia__card-label">Vazamento</span>
+          <h3 class="historia__card-title">Óleo Cru</h3>
+          <div class="historia__card-stat">5.380 <span>toneladas</span></div>
+          <p class="historia__card-desc">De óleo cru foram derramadas nas águas do litoral brasileiro.</p>
+        </div>
+      </div>
+
+      <div class="historia__card reveal-up">
+        <div class="historia__card-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 12c2.5-3 6-3 8.5 0s6 3 8.5 0 6-3 8.5 0"></path>
+            <path d="M2 17c2.5-3 6-3 8.5 0s6 3 8.5 0 6-3 8.5 0"></path>
+            <circle cx="8" cy="8" r="1.5"></circle>
+            <circle cx="16" cy="6" r="1"></circle>
+          </svg>
+        </div>
+        <div class="historia__card-content">
+          <span class="historia__card-label">Extensão</span>
+          <h3 class="historia__card-title">Contaminação da costa</h3>
+          <div class="historia__card-stat">2.890 <span>km</span></div>
+          <p class="historia__card-desc">De linha de costa atingidos em múltiplos estados do país.</p>
+        </div>
+      </div>
+
+      <div class="historia__card reveal-up">
+        <div class="historia__card-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M12 8c-2 2-2 5 0 7 2-2 2-5 0-7z"></path>
+          </svg>
+        </div>
+        <div class="historia__card-content">
+          <span class="historia__card-label">Preservação</span>
+          <h3 class="historia__card-title">Áreas Protegidas</h3>
+          <div class="historia__card-stat">57 <span>unidades</span></div>
+          <p class="historia__card-desc">Áreas de conservação e proteção ambiental sofreram impacto direto.</p>
+        </div>
+      </div>
+
+      <div class="historia__card reveal-up">
+        <div class="historia__card-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 7h.01"></path>
+            <path d="M3.4 18c1.5-3 4-6 8.6-6 4 0 7 3 8 6"></path>
+            <path d="M14 6c0 1.66-1.34 3-3 3-1.07 0-2-.56-2.53-1.4"></path>
+            <path d="M8.5 7.6A3 3 0 0 1 11 3c1.66 0 3 1.34 3 3"></path>
+          </svg>
+        </div>
+        <div class="historia__card-content">
+          <span class="historia__card-label">Biodiversidade</span>
+          <h3 class="historia__card-title">Espécies Ameaçadas</h3>
+          <div class="historia__card-stat">34 <span>espécies</span></div>
+          <p class="historia__card-desc">Fauna e flora marinhas em risco foram diretamente atingidas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ Dobra2dark -->
+   <section id="Interacao" aria-labelledby="interacao-titulo">
+    <div class="scene">
+      <div class="background-layer" aria-hidden="true"><span class="halo a"></span><span class="halo b"></span><span
+          class="halo c"></span></div>
+      <div class="particle-layer" aria-hidden="true" id="particles"></div>
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">SisMOM · Integração das Metas</p>
+          <div class="topline"></div>
+        </div>
+        <div class="stage-readout" aria-live="polite"><span class="dot"></span><span id="stageName">Em
+            espera</span>
+        </div>
+      </header>
+      <div class="intro" id="intro"><span class="kicker">Monitoramento de Derramamentos de Óleo no mar</span>
+        <h1 id="interacao-titulo">Agilidade <br>nas <em>tomadas de Decisão.</em></h1>
+        <p>Como é integrada nossa rede de observação, detecção, previsão e alerta.</p><span class="scroll-cue"><i></i>
+          role para ativar</span>
+      </div>
+      <svg class="connections-layer" viewBox="0 0 1000 581" aria-hidden="true">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#ffffff" />
+          </marker>
+        </defs>
+
+        <!-- 1: Section Observar -> Section Detectar -->
+        <path class="connection" data-path="p1" marker-end="url(#arrow)" d="M 260 300 L 275 300" />
+
+        <!-- 2: Section Detectar -> Meta 03 (Prever) -->
+        <path class="connection" data-path="p2" marker-end="url(#arrow)" d="M 535 300 L 574 300" />
+
+        <!-- 3: Meta 05 -> Meta 03 (mais 10px para esquerda) -->
+        <path class="connection" data-path="p3" marker-end="url(#arrow)" d="M 696 300 L 658 300" />
+
+        <!-- 4: Meta 05 -> Meta 02 (arrastada 30px para esquerda e gap superior reduzido em 10px) -->
+        <path class="connection" data-path="p4" marker-end="url(#arrow)" d="M 753 234 L 753 215 L 505 215 L 505 255" />
+
+        <!-- 5a: Section Observar -> Meta 04 (linhas retas contornando por cima) -->
+        <path class="connection" data-path="p5" marker-end="url(#arrow)" d="M 130 180 L 130 152 L 210 152" />
+
+        <!-- 5b: Section Detectar -> Meta 04 (linha reta vertical) -->
+        <path class="connection" data-path="p6" marker-end="url(#arrow)" d="M 405 180 L 405 152" />
+
+        <!-- 5c: Section Prever -> Meta 04 (linhas retas contornando por cima) -->
+        <path class="connection" data-path="p7" marker-end="url(#arrow)" d="M 680 180 L 680 152 L 600 152" />
+
+        <!-- 6a: Meta 06 -> Section Observar (linha reta vertical subindo) -->
+        <path class="connection" data-path="p8" marker-end="url(#arrow)" marker-start="url(#arrow)" d="M 130 460 L 130 420" />
+
+        <!-- 6b: Meta 06 -> Section Detectar (linha reta vertical subindo) -->
+        <path class="connection" data-path="p9" marker-end="url(#arrow)" marker-start="url(#arrow)" d="M 405 460 L 405 420" />
+
+        <!-- 6c: Meta 06 -> Section Prever (linha reta vertical subindo) -->
+        <path class="connection" data-path="p10" marker-end="url(#arrow)" marker-start="url(#arrow)" d="M 680 460 L 680 420" />
+
+        <!-- 7: Meta 04 -> Section Entregar (linha reta horizontal) -->
+        <path class="connection" data-path="p11" marker-end="url(#arrow)" d="M 810 100 L 850 100" />
+
+        <circle class="pulse" data-pulse="p1" r="4.5" />
+        <circle class="pulse" data-pulse="p2" r="4.5" />
+        <circle class="pulse" data-pulse="p3" r="4.5" />
+        <circle class="pulse" data-pulse="p4" r="4.5" />
+        <circle class="pulse" data-pulse="p5" r="4.5" />
+        <circle class="pulse" data-pulse="p6" r="4.5" />
+        <circle class="pulse" data-pulse="p7" r="4.5" />
+        <circle class="pulse" data-pulse="p8" r="4.5" />
+        <circle class="pulse" data-pulse="p9" r="4.5" />
+        <circle class="pulse" data-pulse="p10" r="4.5" />
+        <circle class="pulse" data-pulse="p11" r="4.5" />
+      </svg>
+      <div class="diagram-layer" id="diagram">
+        <section class="group group-observar" data-group="observar" aria-labelledby="observar">
+          <h2 id="observar" class="group-label"><span>01 · Observar</span></h2>
+          <a href="#" class="meta meta-7" data-meta="7"><span class="number">META 07</span><svg class="icon"
+              viewBox="0 0 97.61 81.24" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta7.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Sensores autônomos<small>Drones e Veículos não tripulados</small></h3>
+          </a>
+          <a href="#" class="meta meta-8" data-meta="8"><span class="number">META 08</span><svg class="icon"
+              viewBox="0 0 98.39 95.48" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta8.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Microssatélites<small>Viabilidade de Constelação</small></h3>
+          </a>
+        </section>
+        <section class="group group-detectar" data-group="detectar" aria-labelledby="detectar">
+          <h2 id="detectar" class="group-label"><span>02 · Detectar</span></h2>
+          <a href="#" class="meta meta-1" data-meta="1"><span class="number">META 01</span><svg class="icon"
+              viewBox="0 0 108.05 98.25" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta1.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Navios<small>SAR e Análises de AIS</small></h3>
+          </a>
+          <a href="#" class="meta meta-2" data-meta="2"><span class="number">META 02</span><svg class="icon"
+              viewBox="0 0 89.02 106.01" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta2.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Óleo no mar<small>Detecção e Análise de tipo de Óleo</small></h3>
+          </a>
+        </section>
+        <section class="group group-prever" data-group="prever" aria-labelledby="prever">
+          <h2 id="prever" class="group-label"><span>03 · Prever</span></h2>
+          <a href="#" class="meta meta-3" data-meta="3"><span class="number">META 03</span><svg class="icon"
+              viewBox="0 0 127.3 87.13" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta3.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Dispersão<small>Modelagem e dispersão de óleo no Mar</small></h3>
+          </a>
+          <a href="#" class="meta meta-5" data-meta="5"><span class="number">META 05</span><svg class="icon"
+              viewBox="0 0 104.16 91.72" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta5.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Previsão oceano-atmosfera<small>Modelagem oceano-atmosférica para prognósticos</small>
+            </h3>
+          </a>
+        </section>
+        <section class="group group-integrar" data-group="integrar" aria-labelledby="integrar">
+          <h2 id="integrar" class="group-label"><span>04 · Integrar e alertar</span></h2>
+          <a href="#" class="meta meta-4" data-meta="4"><span class="number">META 04</span><svg class="icon"
+              viewBox="0 0 171.59 108.62" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta4.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Sala de Situação<small>Integrar a coletar dados, o processamento, o monitoramento, a
+                visualização e a geração de relatórios</small></h3>
+          </a>
+          <a href="#" class="meta meta-6" data-meta="6"><span class="number">META 06</span><svg class="icon"
+              viewBox="0 0 97.45 88" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta6_s.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Infraestrutura 24/7<small>Supercomputação · processamento ·
+                armazenamento</small></h3>
+          </a>
+        </section>
+        <section class="group group-entregar" data-group="entregar" aria-labelledby="entregar">
+          <h2 id="entregar" class="group-label"><span>05 · Alertar</span></h2>
+          <a href="#" class="meta meta-9" data-meta="9"><span class="number">META 09</span><svg class="icon"
+              viewBox="0 0 111.4 136.33" aria-hidden="true">
+              <use href="assets/icons/SVG/icon_meta9.svg#Camada_2"></use>
+            </svg>
+            <h3 class="title">Informação qualificada<small>Para instituições competentes</small></h3>
+          </a>
+        </section>
+      </div>
+      <div class="network-legend"><b></b> relações estratégicas <i></i> fluxo de dados</div>
+      <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+    </div>
+    <p class="screen-reader">A rede integra sensores, satélites, detecção de navios e óleo, previsão de dispersão,
+      modelos oceano-atmosfera, sala de situação, infraestrutura contínua e entrega de informação qualificada.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ METAS -->
+  <section class="metas" id="metas" aria-label="Painel de Metas">
+    <div class="metas__header">
+      <span class="section-eyebrow reveal-up">Painel de Metas</span>
+      <h2 class="section-title reveal-up">
+        Frentes integradas para observar,<br>detectar, prever e responder
+      </h2>
+    </div>
+
+    <div class="metas__cta" style="margin-top:0; margin-bottom: 2.5rem;">
+      <a href="#metas" class="btn-primary reveal-up" id="cta-metas-top">
+        Conheça nossas metas
+      </a>
+    </div>
+
+    <div class="metas__groups">
+
+      <!-- ── OBSERVAR ── -->
+      <div>
+        <p class="metas__group-label reveal-up">Observar</p>
+        <div class="metas__grid">
+
+          <!-- Meta 1 -->
+          <a href="meta1.html" class="meta-card reveal-up" id="meta-card-1" aria-label="Meta 1 — Detecção de Navios">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 01</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 17l1-8h16l1 8H3z"></path>
+                  <path d="M7 17V9.5a5 5 0 0 1 10 0V17"></path>
+                  <path d="M12 2v7"></path>
+                  <path d="M2 17h20"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Detecção de Navios</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Meta 8 -->
+          <a href="meta8.html" class="meta-card reveal-up" id="meta-card-8"
+            aria-label="Meta 8 — Constelação de Satélites">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 08</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                  <circle cx="18" cy="8" r="2"></circle>
+                  <path d="M18 6V2" stroke-dasharray="1.5 1.5"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Constelação de Satélites</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Meta 7 -->
+          <a href="meta7.html" class="meta-card reveal-up" id="meta-card-7" aria-label="Meta 7 — Sensores Autônomos">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 07</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path
+                    d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Sensores Autônomos</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── DETECTAR ── -->
+      <div>
+        <p class="metas__group-label reveal-up">Detectar</p>
+        <div class="metas__grid">
+
+          <!-- Meta 2 -->
+          <a href="meta2.html" class="meta-card reveal-up" id="meta-card-2"
+            aria-label="Meta 2 — Detecção de Óleo no Mar">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 02</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+                  <path d="M12 11.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                    fill="currentColor" opacity="0.3"></path>
+                  <path d="M8 14 Q12 12 16 14" stroke-dasharray="2 1"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Detecção de Óleo no Mar</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Meta 3 -->
+          <a href="meta3.html" class="meta-card reveal-up" id="meta-card-3"
+            aria-label="Meta 3 — Modelagem de Dispersão de Óleo">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 03</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12 C6 8 10 16 14 10 C18 4 20 14 22 12" stroke-dasharray="3 2"></path>
+                  <circle cx="3" cy="12" r="1.5" fill="currentColor"></circle>
+                  <circle cx="14" cy="10" r="1.5" fill="currentColor"></circle>
+                  <circle cx="22" cy="12" r="1.5" fill="currentColor"></circle>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Modelagem de Dispersão de Óleo</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── PREVER ── -->
+      <div>
+        <p class="metas__group-label reveal-up">Prever</p>
+        <div class="metas__grid">
+
+          <!-- Meta 5 -->
+          <a href="meta5.html" class="meta-card reveal-up" id="meta-card-5"
+            aria-label="Meta 5 — Previsão Oceano-Atmosférica">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 05</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                  <path d="M6 20 Q8 17 10 20" stroke-dasharray="2 1"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Previsão Oceano-Atmosférica</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Meta 6 -->
+          <a href="meta6.html" class="meta-card reveal-up" id="meta-card-6" aria-label="Meta 6 — Supercomputação">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 06</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                  <path d="M8 21h8M12 17v4"></path>
+                  <path d="M6 7h1M6 11h1M10 7h8M10 11h8" stroke-width="1"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Supercomputação</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── INTEGRAR E ALERTAR ── -->
+      <div>
+        <p class="metas__group-label reveal-up">Integrar e Alertar</p>
+        <div class="metas__grid">
+
+          <!-- Meta 4 -->
+          <a href="meta4.html" class="meta-card reveal-up" id="meta-card-4" aria-label="Meta 4 — Sala de Situação">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 04</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <path d="M3 9h18M9 21V9"></path>
+                  <path d="M13 13h4M13 17h4M6 13h2M6 17h2" stroke-width="1.5"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Sala de Situação</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Meta 9 -->
+          <a href="meta9.html" class="meta-card reveal-up" id="meta-card-9" aria-label="Meta 9 — Tomadores de Decisão">
+            <div class="meta-card__top">
+              <span class="meta-card__num">Meta 09</span>
+              <div class="meta-card__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  <path d="M20 10l1.5 1.5L23 9" stroke-width="2"></path>
+                </svg>
+              </div>
+            </div>
+            <span class="meta-card__name">Tomadores de Decisão</span>
+            <span class="meta-card__arrow">
+              Acessar
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+    </div><!-- /metas__groups -->
+
+    <div class="metas__cta">
+      <a href="#metas" class="btn-primary reveal-up" id="cta-metas-bottom">
+        Conheça nossas metas
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ INOVAÇÃO -->
+  <section class="innovation" id="inovacao" aria-label="Inovação e APIs">
+    <div class="innovation__header">
+      <span class="section-eyebrow reveal-up">Inovação em desenvolvimento</span>
+      <h2 class="section-title reveal-up">APIs para o ecossistema oceânico</h2>
+      <p class="reveal-up">APIs em desenvolvimento para ampliar a interoperabilidade entre dados, serviços e
+        instituições.</p>
+    </div>
+
+    <div class="innovation__grid">
+
+      <a href="#api-meta-1" class="api-card reveal-up" id="api-meta-1" aria-label="API Meta 1 — em desenvolvimento">
+        <span class="api-card__code">{ }</span>
+        <span class="api-card__label">Em desenvolvimento</span>
+        <span class="api-card__name">API Meta 1<br>Detecção de Navios</span>
+      </a>
+
+      <a href="#api-meta-3" class="api-card reveal-up" id="api-meta-3" aria-label="API Meta 3 — em desenvolvimento">
+        <span class="api-card__code">{ }</span>
+        <span class="api-card__label">Em desenvolvimento</span>
+        <span class="api-card__name">API Meta 3<br>Dispersão de Óleo</span>
+      </a>
+
+      <a href="#api-meta-4" class="api-card reveal-up" id="api-meta-4" aria-label="API Meta 4 — em desenvolvimento">
+        <span class="api-card__code">{ }</span>
+        <span class="api-card__label">Em desenvolvimento</span>
+        <span class="api-card__name">API Meta 4<br>Sala de Situação</span>
+      </a>
+
+      <a href="#api-meta-5" class="api-card reveal-up" id="api-meta-5" aria-label="API Meta 5 — em desenvolvimento">
+        <span class="api-card__code">{ }</span>
+        <span class="api-card__label">Em desenvolvimento</span>
+        <span class="api-card__name">API Meta 5<br>Previsão Oceânica</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FOOTER -->
+  <footer class="footer" id="prototipos" aria-label="Rodapé institucional">
+
+    <!-- Credits -->
+    <div class="footer__credits">
+
+      <div>
+        <p class="footer__col-title">Coordenação</p>
+        <div class="footer__credit-item reveal-up">
+          <span class="footer__name">Paulo Nobre</span>
+          <span class="footer__role">Cientista Chefe e Coordenador Geral</span>
+        </div>
+        <div class="footer__credit-item reveal-up">
+          <span class="footer__name">Jorge Luis Gomes</span>
+          <span class="footer__role">Vice-Coordenador Geral</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Execução e Financiamento</p>
+        <div class="footer__credit-item reveal-up">
+          <span class="label">Financiamento</span>
+          <span class="value">FNDCT-FINEP</span>
+        </div>
+        <div class="footer__credit-item reveal-up">
+          <span class="label">Instituição Executora</span>
+          <span class="value">INPE</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Instituições Colaboradoras</p>
+        <p class="reveal-up" style="font-size:0.8rem; line-height:1.8; color:var(--ink-muted);">
+          IBAMA · MB – DGDNTM · CTMRJ<br>
+          IPqM · CASNAV · IEAPM · DHN<br>
+          COMPAAZ · CTI-RA · UFSB · UFES<br>
+          CERN · NOAA
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Partners carousel -->
+    <p class="footer__partners-title">Parceiros e Instituições</p>
+    <div class="footer__partners-strip" role="region" aria-label="Carrossel de parceiros" tabindex="0">
+      <div class="footer__partners-track">
+        <span class="partner-logo partner-logo--featured">INPE</span>
+        <span class="partner-logo partner-logo--featured">Marinha do Brasil</span>
+        <span class="partner-logo">CASNAV</span>
+        <span class="partner-logo">CERN</span>
+        <span class="partner-logo">COMPAAZ</span>
+        <span class="partner-logo">CTI-RA</span>
+        <span class="partner-logo">CTMRJ</span>
+        <span class="partner-logo">DHN</span>
+        <span class="partner-logo">IBAMA</span>
+        <span class="partner-logo">IEAPM</span>
+        <span class="partner-logo">IPqM</span>
+        <span class="partner-logo">NOAA</span>
+        <span class="partner-logo">UFES</span>
+        <span class="partner-logo">UFSB</span>
+        <!-- duplicata -->
+        <span class="partner-logo partner-logo--featured">INPE</span>
+        <span class="partner-logo partner-logo--featured">Marinha do Brasil</span>
+        <span class="partner-logo">CASNAV</span>
+        <span class="partner-logo">CERN</span>
+        <span class="partner-logo">COMPAAZ</span>
+        <span class="partner-logo">CTI-RA</span>
+        <span class="partner-logo">CTMRJ</span>
+        <span class="partner-logo">DHN</span>
+        <span class="partner-logo">IBAMA</span>
+        <span class="partner-logo">IEAPM</span>
+        <span class="partner-logo">IPqM</span>
+        <span class="partner-logo">NOAA</span>
+        <span class="partner-logo">UFES</span>
+        <span class="partner-logo">UFSB</span>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>SisMOM © 2026 · INPE / FNDCT-FINEP</span>
+      <span>SISMOM / MONITORAMENTO MARÍTIMO / BR</span>
+    </div>
+
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════ SCRIPTS -->
+  <script src="assets/sismom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/dobra2.1.js"></script>
+
+</body>
+
+</html>

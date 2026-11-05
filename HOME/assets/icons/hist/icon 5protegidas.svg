@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.97 253.35"><metadata><?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?><x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 6.0.0"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmpMM:DocumentID="xmp.did:cb9f5498-bb58-4572-8043-8c369e6bfb9b" xmpMM:InstanceID="xmp.iid:cb9f5498-bb58-4572-8043-8c369e6bfb9b" dcterms:provenance="https://cai-manifests.adobe.com/manifests/urn-c2pa-2ad50b7e-3207-46f8-864a-d15aa6b406c8-adobe"> </rdf:Description></rdf:RDF></x:xmpmeta>
+<?xpacket end="w"?></metadata>
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 19.37px;
+      }
+    </style>
+  </defs>
+  <g id="Camada_1-2" data-name="Camada 1">
+    <g>
+      <path class="cls-1" d="M63.63,175.46c3.08.43,5.73-.47,8.93-.73,3.68-.31,8.46-.71,12.02-.08l25.57,4.53c10.99,1.95,22,3.45,33.19,2.09"/>
+      <path class="cls-1" d="M128.84,172.67c2.77-8.12,14.88-14.19,18.79-21.48,3.24-6.04-3.57-21.07-.92-27.38,2.42-5.77,18.42-16.93,18.42-16.93"/>
+      <path class="cls-1" d="M114.07,168.69c-4.81-15.74-4.69-21.16,2.71-34.87,4.4-8.15,4.94-18.62.25-26.81-5.07-8.87-4.31-18.67,1.71-26.04"/>
+      <path class="cls-1" d="M72.74,164.12l-11.52-12.11c-7.24-9.79-7.75-22.55-4.62-33.95,1.45-5.3,1.02-9.75-1.62-14.61l-4.22-7.83"/>
+      <path class="cls-1" d="M91.43,165.56l-.76-16.99c-.26-5.54.82-13.4-2.57-17.94-7.27-9.74-8.04-20.32-1.4-30.43,7.07-10.76-11.42-28.13,3.31-42.26"/>
+      <path class="cls-1" d="M9.68,39.68l13.49-.62c2.58-.12,4.69.09,7.28-.13,24.28-2.11,47.24-12.04,68.01-27.1,4.39-3.18,7.26-2.64,11.57.54,21.53,15.89,45.67,25.45,70.97,26.53,4.8.21,8.92.75,13.75.32,1.52-.14,2.38,2.67,2.39,4.22l.14,29.51-.62,50.84c-1.39,22.19-6.66,43.28-17.74,61.18-1.21,1.95-2.52,4.28-3.89,5.9l-13.21,15.63c-14.96,15.79-38.5,31.7-57.8,37.19-23.42-7.62-49.64-25.56-66.17-45.21-19.56-23.25-27.69-55.15-27.84-88.16l-.33-70.62Z"/>
+    </g>
+  </g>
+</svg>
