@@ -683,18 +683,69 @@ button {
 
 /* ── HISTÓRIA SECTION (Origem & Motivação 2019) ── */
 .historia {
+  --historia-blue-start: #146EF5;
+  --historia-blue-mid: #0960E5;
+  --historia-blue-deep: #0747AC;
+  --historia-blue-end: #071349;
+  --historia-grid-opacity: .38;
+  --historia-halo-opacity: .3;
+  --historia-halo-blur: 80px;
+  --historia-wave-opacity: .88;
   padding: clamp(4rem, 7vw, 7rem) clamp(1.5rem, 6vw, 7rem);
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+  background: radial-gradient(circle at 50% 28%, var(--historia-blue-start) 0%, var(--historia-blue-mid) 45%, var(--historia-blue-deep) 82%, var(--historia-blue-end) 100%);
 }
 
 .historia::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(9, 96, 229, 0.12) 0%, transparent 70%);
+  z-index: 0;
+  opacity: var(--historia-grid-opacity);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
+  background-size: clamp(42px, 4vw, 74px) clamp(42px, 4vw, 74px);
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 46%, #000, transparent 82%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 46%, #000, transparent 82%);
   pointer-events: none;
+}
+
+.historia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: var(--historia-halo-opacity);
+  background:
+    radial-gradient(circle 25vw at 120% 124%, #0960E5 0%, rgba(4, 20, 89, .596) 45%, transparent 70%),
+    radial-gradient(circle 16vw at 51% 43%, rgba(255, 255, 255, .28), rgba(76, 192, 252, .18) 40%, transparent 70%);
+  filter: blur(var(--historia-halo-blur));
+  pointer-events: none;
+}
+
+.historia > :not(.historia__wave) {
+  position: relative;
+  z-index: 2;
+}
+
+.historia__wave {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: var(--historia-wave-opacity);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.historia__wave canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .historia__header {

@@ -187,4 +187,33 @@
       heroBase.style.transform = `translateY(${pct * 12}%) scale(1.08)`;
     }, { passive: true });
   }
+
+  /* ─── História → Interação: dissolução azul para azul-marinho ─── */
+  const historia = document.getElementById('historia');
+  const interacao = document.getElementById('Interacao');
+  const isCompactLayout = window.matchMedia('(max-width: 780px)').matches;
+
+  if (!reduceMotion && !isCompactLayout && historia && interacao && window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to(historia, {
+      '--historia-blue-start': '#010A34',
+      '--historia-blue-mid': '#010A34',
+      '--historia-blue-deep': '#010A34',
+      '--historia-blue-end': '#010A34',
+      '--historia-grid-opacity': 0,
+      '--historia-halo-opacity': 0,
+      '--historia-halo-blur': '112px',
+      '--historia-wave-opacity': 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: historia,
+        start: '65% bottom',
+        endTrigger: interacao,
+        end: 'top top',
+        scrub: 0.9,
+        invalidateOnRefresh: true
+      }
+    });
+  }
 })();
